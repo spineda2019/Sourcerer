@@ -28,6 +28,7 @@ int main(void) {
         return -1;
     }
 
+    std::cout << "Examining: " << dir.value() << std::endl;
     sp::Sourcerer sourcerer(dir.value());
 
     return 0;
