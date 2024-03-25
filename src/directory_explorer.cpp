@@ -27,6 +27,21 @@ bool IsDirectoryASourceControlDirectory(const std::string_view directory) {
     return std::find(valid_directories.begin(), valid_directories.end(),
                      directory) != valid_directories.end();
 }
+
+std::optional<std::filesystem::path> FindSourceControlDirectory(
+    const std::filesystem::path& directory) {
+    for (const auto& entry : std::filesystem::directory_iterator(directory)) {
+        if (entry.is_directory() && IsDirectoryASourceControlDirectory(
+                                        entry.path().filename().c_str())) {
+            return entry;
+        }
+    }
+    if (directory == directory.root_path()) {
+        return {};
+    } else {
+        return FindSourceControlDirectory(directory.parent_path());
+    }
+}
 }  // namespace
 
 std::optional<std::filesystem::path> FindSourceControlDirectory() {
@@ -39,6 +54,10 @@ std::optional<std::filesystem::path> FindSourceControlDirectory() {
         }
     }
 
-    return {};
+    if (cwd == cwd.root_path()) {
+        return {};
+    } else {
+        return FindSourceControlDirectory(cwd.parent_path());
+    }
 }
 }  // namespace sp
