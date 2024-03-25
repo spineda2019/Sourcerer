@@ -14,4 +14,21 @@
    limitations under the License.
  */
 
-int main(void) { return 0; }
+#include <iostream>
+#include <optional>
+
+#include "include/Sourcerer.hpp"
+#include "include/directory_explorer.hpp"
+
+int main(void) {
+    std::optional<std::filesystem::path> dir(sp::FindSourceControlDirectory());
+
+    if (!dir.has_value()) {
+        std::cerr << "Not in a Source Controlled Directery!" << std::endl;
+        return -1;
+    }
+
+    sp::Sourcerer sourcerer(dir.value());
+
+    return 0;
+}
