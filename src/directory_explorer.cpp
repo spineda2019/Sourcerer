@@ -14,13 +14,17 @@
    limitations under the License.
  */
 
+#include <algorithm>
+#include <array>
 #include <filesystem>
 #include <optional>
 #include <string_view>
 
 namespace sp {
+constexpr std::array<std::string_view, 2> valid_directories{".git", ".svn"};
 bool IsDirectoryASourceControlDirectory(const std::string_view directory) {
-    return false;
+    return std::find(valid_directories.begin(), valid_directories.end(),
+                     directory) != valid_directories.end();
 }
 
 std::optional<std::filesystem::path> FindSourceControlDirectory() {
