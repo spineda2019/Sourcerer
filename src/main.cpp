@@ -31,5 +31,7 @@ int main(void) {
     std::cout << "Examining: " << dir.value() << std::endl;
     sp::Sourcerer sourcerer(dir.value());
 
+    sourcerer.ExtractDetails();
+
     return 0;
 }
