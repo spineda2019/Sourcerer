@@ -9,7 +9,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 include_directories(src/include)
 
 # when adding a new file, make sure it is added here for proper linking
-set(SOURCES "src/main.cpp")
+set(SOURCES
+    "src/main.cpp"
+    "src/Sourcerer.cpp")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
