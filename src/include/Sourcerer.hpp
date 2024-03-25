@@ -31,7 +31,12 @@ class Sourcerer {
     explicit Sourcerer(
         const std::filesystem::path& source_control_directory_path);
 
+    void ExtractDetails() const;
+
  private:
+    void ParseGitFolder() const;
+    void ParseSvnFolder() const;
+
     const std::filesystem::path absolute_source_control_directory_path_;
     SourceControlTool source_control_tool_;
 };

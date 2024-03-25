@@ -21,6 +21,7 @@
 #include <iostream>
 
 namespace sp {
+
 Sourcerer::Sourcerer(const std::filesystem::path& source_control_directory_path)
     : absolute_source_control_directory_path_(source_control_directory_path) {
     // TODO(SEP): Is there a better way to init our state?
@@ -37,4 +38,18 @@ Sourcerer::Sourcerer(const std::filesystem::path& source_control_directory_path)
         std::exit(EXIT_FAILURE);
     }
 }
+
+void Sourcerer::ExtractDetails() const {
+    switch (this->source_control_tool_) {
+        case SourceControlTool::Git:
+            this->ParseGitFolder();
+            break;
+        case SourceControlTool::Svn:
+            this->ParseSvnFolder();
+            break;
+    }
+}
+
+void Sourcerer::ParseGitFolder() const {}
+void Sourcerer::ParseSvnFolder() const {}
 }  // namespace sp
