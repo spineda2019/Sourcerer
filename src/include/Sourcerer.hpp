@@ -17,9 +17,15 @@
 #ifndef SRC_INCLUDE_SOURCERER_HPP_
 #define SRC_INCLUDE_SOURCERER_HPP_
 
+#include <cstdint>
 #include <filesystem>
 
 namespace sp {
+enum class SourceControlTool : std::uint8_t {
+    Git,
+    Svn,
+};
+
 class Sourcerer {
  public:
     explicit Sourcerer(
@@ -27,6 +33,7 @@ class Sourcerer {
 
  private:
     const std::filesystem::path absolute_source_control_directory_path_;
+    SourceControlTool source_control_tool_;
 };
 }  // namespace sp
 
