@@ -1,1 +1,4 @@
 BasedOnStyle: Google
+
+CommentSpacing: 2
+IndentWidth: 4
