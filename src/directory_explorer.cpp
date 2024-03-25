@@ -21,11 +21,13 @@
 #include <string_view>
 
 namespace sp {
+namespace {
 constexpr std::array<std::string_view, 2> valid_directories{".git", ".svn"};
 bool IsDirectoryASourceControlDirectory(const std::string_view directory) {
     return std::find(valid_directories.begin(), valid_directories.end(),
                      directory) != valid_directories.end();
 }
+}  // namespace
 
 std::optional<std::filesystem::path> FindSourceControlDirectory() {
     std::filesystem::path cwd(std::filesystem::current_path());
