@@ -11,7 +11,8 @@ include_directories(src/include)
 # when adding a new file, make sure it is added here for proper linking
 set(SOURCES
     "src/main.cpp"
-    "src/Sourcerer.cpp")
+    "src/Sourcerer.cpp"
+    "src/directory_explorer.cpp")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
